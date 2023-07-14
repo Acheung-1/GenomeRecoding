@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vaccine Development: Optimizing CpG Spacing</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+  <div>
+    <h1>Optimizing CpGs in viral genome to ZAP</h1>
+    <h2>A method for vaccine development</h2>
+    <h1>By Andrew Cheung</h1>
+  </div>
+
+  <div>
+    <h3>Background/Rationale</h3>
+    <p> 
+      One approach to developing effective vaccines is by attenuating, or weakening, a virus. All organisms are made of the same 4 nucleic acids in their DNA: adenosine (A), cytosine (C), guanosine (G), and thymidine (T). Eukaryotic organisms have evolved to suppress the number of cytosines followed by guanines (CpGs) in their genome. Scientists have discovered that the CpG dinucleotide frequency in eukaryotic genomes is statistically smaller than randomly expected. Viruses that infect these organisms have coevolved to minimize their own CpG frequency to mimic the host genome and to avoid detection from the host immune system. It is hypothesized that the zinc-finger antiviral protein (ZAP) plays a major role in the inhibition of viral RNA, by binding to CpGs and recruiting protein machinery to degrade the viral RNA. Successful attenuation of a viruses have been done by optimizing CpGs.<a href="https://www.nature.com/articles/s41564-022-01223-8" target="_blank" style="text-decoration:none"><sup>1</a>
+    </p>
+    
+  </div>
+
+  <div>
+    <h3> How this code works!</h3>
+    <p> 
+      This code requires a user input DNA sequence, using only the nucleotides "A", "T", "G", and "C". This DNA strand will be converted into a DNA sequence that contains the maximum number of CpGs possible while preserving the amino acid coding. This can be done since one amino acid has many codon pairings (Ex: Leucine can be coded by 6 different codons!). Recall that three nucleotides will be translated into one amino acid. The wobble position of a codon (3rd nucleotide in a codon) can vary and still potentially encode for the same nucleotide. If leucine is currently encoded as "CTT", this can be changed to "CTC" to increasing the chances of introducing a CpG if the next nucleotide is a "G".
+    </p>
+    
+    
+    <p>  
+      The code will then decide which CpG locations would optimally spread the CpGs to be ~13 nucleotides apart. This has been identified as the optimal spacing for ZAP susceptibility and detection by the host immune response. It is possible for some regions to not allow spacings of CpGs to be 13 nucleotides apart due to the specific protein coding in that region. Once the locations are determined, a viable DNA sequence will be produced, measured by GC content. GC content (the number of Cs and Gs over the number of all nucleotides expressed as a percentage) is an important factor for viability (Ex: Human genomes have an average GC content that ranges from 35% to 60% across 100-Kb fragments).
+    </p>
+  </div>
+
+  <br>
+
+  <div>
+    <p>Feel free to test with a 1500bp segment of the Powassan Virus genome provided below: </p>
+    <div class="container">
+      <p>   
+        ctagcttcggctttccattggtccggaatactggtgacaatgggggcatggacactgtatgagctcttctcatcagcacgcagaactgaccttgtattctcagggcaattgtctgaccatggggagaaacggccttttgacatcaaagatggcgtctatcgcatatacgcccctggactcgtatggggtcaccgtcagattggagtggggtatggagcaaaaggagtcctacacaccatgtggcatgtgacaagaggagcggctcttagtgtggaaggggccgtctcgggaccatattgggcggatgtgcgtgaggacgtggtctgttatggaggtgcctggagcttggaaggaaaatggggaggtgaagttgttcaggtccatgcttttccaccagacagtggacataaagttcatcaatgccaaccagggaaactgaatcttgagggagggcgagtcatgggggccatcccaatagacttacctcgtggaacctcaggcagcccaatcatcaacgcacaaggggttgtgttgggtctctacggtaacggtctgaaatccaatgatgtttacatcagcagcatcgctcaaggtagcgttgagaaaagccgaccagaaatgccgttggcaatccaggggggcagatggacatcaaaaggcagcatcacagtcctggacatgcatcctggatcgggaaagacacatagagtccttcccgagctgattcgtgaatgcattgacaaaagattgaggactgttgtgttggccccaacgcgggttgttctgaaagagatggaaagagccctgcaagggaaacgcgtcaagttccactcggctgccgttgacaacacctcttcatcattgggggccattgttgatgtcatgtgccacgccacttatgtcaatcgccgactcttgccacaggggagacagaattgggaggtggccataatggatgaagcacattggactgatcctcacagtatagcagcacgtggtcacctgtactctttggctaaagagaacagatgcgcgtttgttctgatgacagctactccaccgggcaagagtgaggcattccccgagtccaaaggagccatagtgagtgaagaaagacccattcccgatggggagtggagagatggctttgattggataacggaatttgaaggccggacggcttggttcgtgtcatcaatagccaaaggaggcgctatagcacgaacactgaggcagaaagggaaaagtgtgatttgtttgaacagcaagacttttgacaaagactatggcagagtccgtgaagaaaaacctgactttgttgtgacgaccgacatctcagaaatgggggccaacttggacgtcaacagggtcattgatggcaggaccaatatcaagcctgaagaaatagacggaagagtggaactggccggcacaaggcgagtaacaacagcatcagcggcacaacgcagggggcgggtcggaaggcatgaaggacgcaca</p>
+    </div>
+  </div>
+
+  <div>
+    <h3> Input DNA Sequence below: </h3>
+    
+    <p>
+      <br>
+      <br>
+    
+      <button id="clearInput" onclick="document.getElementById('inputDNA').value = ''"> Clear input field </button>
+      <br>
+    
+      <textarea id="inputDNA" value="Put DNA Sequence here" style="height:200px;width:95%;border:2px solid black"></textarea>
+      <br>
+      <button id="convert">Convert</button>
+    </p>
+  </div>
+
+  <div>
+    <div class="container">
+      <p id="a">Protein Sequence: </p>
+      <p> Note: # represents a stop codon</p>
+    </div>
+
+    <div class="flex-container">
+      <div class="content" id="input">
+        <p id="b">Input DNA - Number of CpGs: </p>
+        <p id="c">Input DNA - GC Content (%): </p>
+      </div>
+  
+      <div class="content" id="output">
+        <p id="d">Optimized CpG Locations: </p>
+        <p id="e">Average distance between each CpG in optimized: </p>
+        <p id="f">Optimized DNA - Number of CpGs: </p>
+        <p id="g">Optimized DNA - GC Content (%): </p>
+        <p id="h">Optimized DNA - Sequence: </p>
+      </div>
+      </div>
+    <br>
+    
+    
+    </p>
+
+  </div>
+
+<script type="text/javascript" src="functions.js"></script>
+</body>
+</html>
